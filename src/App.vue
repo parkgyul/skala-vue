@@ -1,24 +1,26 @@
 <script setup>
 // import HelloWorld from './components/HelloWorld.vue'
 // import TheWelcome from './components/TheWelcome.vue'
-import Weather from './components/practices/basic/Weather.vue'
 import SampleTwo from './components/practices/basic/SampleTwo.vue'
 import SampleThree from './components/practices/basic/SampleThree.vue'
 import SampleFour from './components/practices/basic/SampleFour.vue'
 import SlotDefaultParent from './components/practices/basic/SlotDefaultParent.vue'
 import SlotNamedParent from './components/practices/basic/SlotNamedParent.vue'  
 import SlotScopedParent from './components/practices/basic/SlotScopedParent.vue'
+import weather from './components/practices/basic/Weather.vue'
+import weatherParent from './components/practices/assignment/WeatherParent.vue'
 </script>
 
 <template>
-  <div style = "padding: 20px">
+  <div style = "padding: 10px">
     <!-- <SampleTwo/> -->
     <!-- <SampleThree/> -->
     <!-- <SampleFour/> -->
     <!-- <Weather/> -->
     <!-- <SlotDefaultParent/> -->
     <!-- <SlotNamedParent/> -->
-    <SlotScopedParent/>
+    <!-- <SlotScopedParent/> -->
+    <weatherParent/>
   </div>
 </template>
 
