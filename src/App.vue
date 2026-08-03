@@ -4,12 +4,14 @@
 import Weather from './components/practices/basic/Weather.vue'
 import SampleTwo from './components/practices/basic/SampleTwo.vue'
 import SampleThree from './components/practices/basic/SampleThree.vue'
+import SampleFour from './components/practices/basic/SampleFour.vue'
 </script>
 
 <template>
   <div style = "padding: 20px">
     <!-- <SampleTwo/> -->
     <!-- <SampleThree/> -->
+    <!-- <SampleFour/> -->
     <Weather/>
   </div>
 </template>
