@@ -1,5 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
+
+const searchQuery = ref('')
+const selectedCityInfo = ref('')
 
 const weatherList = ref([
   { id: 'city_01', city: '서울', temperature: 28, condition: '맑음' },
@@ -7,22 +10,26 @@ const weatherList = ref([
   { id: 'city_03', city: '부산', temperature: 26, condition: '구름' },
 ])
 
-const keyword = ref('')
-
-function handleInput(event) {
-  keyword.value = event.target.value
-}
-
-const filteredList = computed(() => {
-  const query = keyword.value.trim()
+const filteredWeatherList = computed(() => {
+  const query = searchQuery.value.trim()
   if (!query) return weatherList.value
   return weatherList.value.filter(item => item.city.includes(query))
 })
 
-const selectedMessage = ref('')
+watch(selectedCityInfo, (newValue, oldValue) => {
+  console.log(`[watch 감지] 상태 바 문구가 업데이트되었습니다 -> "${newValue}"`)
+})
+
+watchEffect(() => {
+  console.log(`[watchEffect 자동 호출] 현재 검색어 '${searchQuery.value}'에 매칭되는 API 데이터를 필터링합니다.`)
+})
+
+function handleInput(event) {
+  searchQuery.value = event.target.value
+}
 
 function showDetail(item) {
-  selectedMessage.value = `${item.city}이 선택되었습니다.`
+  selectedCityInfo.value = `${item.city}이(가) 선택되었습니다.`
   alert(`${item.city} · ${item.condition} · 현재 기온 ${item.temperature}°C`)
 }
 
@@ -33,62 +40,81 @@ function handleCardClick(item) {
 
 <template>
   <div class="page">
-  <main class="dashboard">
-    <header class="dashboard__head">
-      <span class="dashboard__icon">🌤️</span>
-      <h1>1일차 과제: 날씨 대시보드 Mockup</h1>
-    </header>
+    <main class="dashboard">
+      <header class="dashboard__head">
+        <span class="dashboard__icon">🌤️</span>
+        <h1>과제 2: 날씨 (컴포지션)</h1>
+      </header>
 
-    <section class="panel">
-      <label class="search">
-        <span class="search__label">🔍 도시 검색 (한글 즉시 동기화)</span>
-        <input
-          type="text"
-          placeholder="예: 서울"
-          :value="keyword"
-          @input="handleInput"
-        />
-      </label>
-      <p class="search__echo">
-        검색 중인 도시: <strong>{{ keyword || '전체' }}</strong>
-      </p>
-    </section>
+      <section class="panel">
+        <label class="search">
+          <span class="search__label">🔍 도시 검색</span>
+          <input
+            type="text"
+            placeholder="예: 서울"
+            :value="searchQuery"
+            @input="handleInput"
+          />
+        </label>
+        <p class="search__echo">
+          검색 중인 도시: <strong>{{ searchQuery || '전체' }}</strong>
+        </p>
+      </section>
 
-    <section class="panel">
-      <h2 class="panel__title">🗺️ 지역별 날씨 현황</h2>
+      <section class="panel">
+        <h2 class="panel__title">🗺️ 지역별 날씨 현황</h2>
 
-      <ul class="cards">
-        <li
-          v-for="item in filteredList"
-          :key="item.id"
-          class="card"
-          @click="handleCardClick(item)"
-        >
-          <div class="card__info">
-            <p class="card__name">{{ item.city }} ({{ item.condition }})</p>
-            <p class="card__temp">현재 기온: {{ item.temperature }}°C</p>
+        <template v-if="searchQuery.trim() === ''">
+          <ul class="cards">
+            <li
+              v-for="item in weatherList"
+              :key="item.id"
+              class="card"
+              @click="handleCardClick(item)"
+            >
+              <div class="card__info">
+                <p class="card__name">{{ item.city }} ({{ item.condition }})</p>
+                <p class="card__temp">현재 기온: {{ item.temperature }}°C</p>
+                <span v-if="item.temperature >= 25" class="tag tag--hot">🔥 더움 (25도 이상)</span>
+                <span v-else class="tag tag--cool">❄️ 선선함 (25도 미만)</span>
+              </div>
+              <button type="button" class="card__button" @click.stop="showDetail(item)">
+                상세보기
+              </button>
+            </li>
+          </ul>
+        </template>
 
-            <span v-if="item.temperature >= 25" class="tag tag--hot">
-              🔥 더움 (25도 이상)
-            </span>
-            <span v-else class="tag tag--cool">
-              ❄️ 선선함 (25도 미만)
-            </span>
-          </div>
+        <template v-else-if="filteredWeatherList.length > 0">
+          <ul class="cards">
+            <li
+              v-for="item in filteredWeatherList"
+              :key="item.id"
+              class="card"
+              @click="handleCardClick(item)"
+            >
+              <div class="card__info">
+                <p class="card__name">{{ item.city }} ({{ item.condition }})</p>
+                <p class="card__temp">현재 기온: {{ item.temperature }}°C</p>
+                <span v-if="item.temperature >= 25" class="tag tag--hot">🔥 더움 (25도 이상)</span>
+                <span v-else class="tag tag--cool">❄️ 선선함 (25도 미만)</span>
+              </div>
+              <button type="button" class="card__button" @click.stop="showDetail(item)">
+                상세보기
+              </button>
+            </li>
+          </ul>
+        </template>
 
-          <button type="button" class="card__button" @click.stop="showDetail(item)">
-            상세보기 (팝업)
-          </button>
-        </li>
-      </ul>
+        <template v-else>
+          <p class="empty">
+            "{{ searchQuery }}"와 일치하는 도시가 없습니다.
+          </p>
+        </template>
+      </section>
 
-      <p v-if="filteredList.length === 0" class="empty">
-        "{{ keyword }}"와 일치하는 도시가 없습니다.
-      </p>
-    </section>
-
-    <p v-if="selectedMessage" class="notice">{{ selectedMessage }}</p>
-  </main>
+      <p v-if="selectedCityInfo" class="notice">{{ selectedCityInfo }}</p>
+    </main>
   </div>
 </template>
 
@@ -116,7 +142,7 @@ function handleCardClick(item) {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .dashboard__icon {
