@@ -2,12 +2,15 @@
 // import HelloWorld from './components/HelloWorld.vue'
 // import TheWelcome from './components/TheWelcome.vue'
 import Weather from './components/practices/basic/Weather.vue'
-
+import SampleTwo from './components/practices/basic/SampleTwo.vue'
+import SampleThree from './components/practices/basic/SampleThree.vue'
 </script>
 
 <template>
   <div style = "padding: 20px">
-    <Weather />
+    <!-- <SampleTwo/> -->
+    <!-- <SampleThree/> -->
+    <Weather/>
   </div>
 </template>
 
