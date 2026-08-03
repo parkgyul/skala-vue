@@ -5,6 +5,9 @@ import Weather from './components/practices/basic/Weather.vue'
 import SampleTwo from './components/practices/basic/SampleTwo.vue'
 import SampleThree from './components/practices/basic/SampleThree.vue'
 import SampleFour from './components/practices/basic/SampleFour.vue'
+import SlotDefaultParent from './components/practices/basic/SlotDefaultParent.vue'
+import SlotNamedParent from './components/practices/basic/SlotNamedParent.vue'  
+import SlotScopedParent from './components/practices/basic/SlotScopedParent.vue'
 </script>
 
 <template>
@@ -12,7 +15,10 @@ import SampleFour from './components/practices/basic/SampleFour.vue'
     <!-- <SampleTwo/> -->
     <!-- <SampleThree/> -->
     <!-- <SampleFour/> -->
-    <Weather/>
+    <!-- <Weather/> -->
+    <!-- <SlotDefaultParent/> -->
+    <!-- <SlotNamedParent/> -->
+    <SlotScopedParent/>
   </div>
 </template>
 
