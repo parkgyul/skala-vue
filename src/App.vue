@@ -16,13 +16,20 @@ import UnitToggler from './components/exercise/UnitToggler.vue'
             🌥️ 날씨 대시보드
           </RouterLink>
           <span class="nav-bar__divider">|</span>
+          <RouterLink to="/live" class="nav-bar__link" active-class="nav-bar__link--active">
+            🌍 실시간 검색
+          </RouterLink>
+          <span class="nav-bar__divider">|</span>
           <RouterLink to="/about" class="nav-bar__link" active-class="nav-bar__link--active">
             ℹ️ 서비스 소개
           </RouterLink>
         </div>
 
+        <!-- Store 과제: Navigation Bar 옆에 UnitToggler 배치 -->
         <UnitToggler />
       </nav>
+
+      <!-- 라우트에 매칭된 컴포넌트가 이 자리에 렌더링된다 -->
       <RouterView />
     </main>
   </div>
