@@ -16,7 +16,9 @@ function toOpenWeatherUnits(unit) {
  */
 export async function fetchLiveWeather(cityName, unit) {
   if (!API_KEY || API_KEY.includes('여기에')) {
-    throw new Error('API 키가 설정되지 않았습니다. .env 파일에 VITE_OPENWEATHER_API_KEY를 입력하세요.')
+    throw new Error(
+      'API 키가 설정되지 않았습니다. .env 파일에 VITE_OPENWEATHER_API_KEY를 입력하세요.'
+    )
   }
 
   const response = await axios.get(CURRENT_URL, {
@@ -70,7 +72,9 @@ function summarizeToDaily(list) {
  */
 export async function fetchForecast(cityName, unit) {
   if (!API_KEY || API_KEY.includes('여기에')) {
-    throw new Error('API 키가 설정되지 않았습니다. .env 파일에 VITE_OPENWEATHER_API_KEY를 입력하세요.')
+    throw new Error(
+      'API 키가 설정되지 않았습니다. .env 파일에 VITE_OPENWEATHER_API_KEY를 입력하세요.'
+    )
   }
 
   const response = await axios.get(FORECAST_URL, {

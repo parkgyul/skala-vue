@@ -50,7 +50,11 @@ import UnitToggler from './components/exercise/UnitToggler.vue'
   width: 100%;
   max-width: 760px;
   padding: 36px;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    'Pretendard',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   color: #1f2933;
   font-size: 18px;
 }
@@ -107,8 +111,16 @@ import UnitToggler from './components/exercise/UnitToggler.vue'
 }
 
 @media (max-width: 480px) {
-  .page { padding: 24px 12px; }
-  .dashboard { padding: 20px; font-size: 16px; }
-  .nav-bar { flex-direction: column; align-items: flex-start; }
+  .page {
+    padding: 24px 12px;
+  }
+  .dashboard {
+    padding: 20px;
+    font-size: 16px;
+  }
+  .nav-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 </style>

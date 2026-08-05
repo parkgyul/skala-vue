@@ -22,7 +22,7 @@ const routes = [
     path: '/weather/:cityId',
     name: 'weather-detail',
     component: () => import('../views/WeatherDetailView.vue'),
-    props: true 
+    props: true
   },
   {
     path: '/:pathMatch(.*)*',

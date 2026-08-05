@@ -35,8 +35,8 @@ const isHot = computed(() => props.city.temperature >= 25)
       <p class="weather-card__name">{{ city.city }} ({{ city.condition }})</p>
       <p class="weather-card__temp">현재 기온: {{ displayTemp }}{{ unitSymbol }}</p>
 
-      <el-tag v-if="isHot" type="danger" round effect="light">🔥 더움</el-tag>
-      <el-tag v-else type="primary" round effect="light">❄️ 선선함</el-tag>
+      <el-tag v-if="isHot" type="danger" round effect="light"> 🔥 더움 </el-tag>
+      <el-tag v-else type="primary" round effect="light"> ❄️ 선선함 </el-tag>
     </div>
 
     <el-button class="weather-card__button" @click.stop="emit('click-detail', city)">

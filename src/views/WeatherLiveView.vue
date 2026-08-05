@@ -51,12 +51,15 @@ function formatDate(dateStr) {
   return `${d.getMonth() + 1}/${d.getDate()}`
 }
 
-watch(() => configStore.unit, () => {
-  if (result.value) {
-    cityInput.value = result.value.city
-    handleSearch()
+watch(
+  () => configStore.unit,
+  () => {
+    if (result.value) {
+      cityInput.value = result.value.city
+      handleSearch()
+    }
   }
-})
+)
 </script>
 
 <template>
@@ -74,7 +77,7 @@ watch(() => configStore.unit, () => {
         clearable
         @keyup.enter="handleSearch"
       >
-        <template #prefix>🔍</template>
+        <template #prefix> 🔍 </template>
       </el-input>
       <el-button type="primary" size="large" :loading="isLoading" @click="handleSearch">
         검색
@@ -96,9 +99,13 @@ watch(() => configStore.unit, () => {
 
     <!-- 정상 결과 -->
     <div v-else-if="result" class="result">
-      <p class="result__name">{{ result.city }}<span v-if="result.country">, {{ result.country }}</span></p>
+      <p class="result__name">
+        {{ result.city }}<span v-if="result.country">, {{ result.country }}</span>
+      </p>
       <p class="result__temp">{{ result.temperature }}{{ configStore.unitSymbol }}</p>
-      <p class="result__meta">체감 {{ result.feelsLike }}{{ configStore.unitSymbol }} · {{ result.condition }}</p>
+      <p class="result__meta">
+        체감 {{ result.feelsLike }}{{ configStore.unitSymbol }} · {{ result.condition }}
+      </p>
       <div class="result__extra">
         <span>습도 {{ result.humidity }}%</span>
         <span>풍속 {{ result.windSpeed }}m/s</span>
@@ -110,9 +117,13 @@ watch(() => configStore.unit, () => {
         <el-skeleton v-if="isForecastLoading" :rows="1" animated />
         <div v-else-if="forecast.length > 0" class="forecast__list">
           <div v-for="day in forecast" :key="day.date" class="forecast__card">
-            <p class="forecast__date">{{ formatDate(day.date) }}</p>
+            <p class="forecast__date">
+              {{ formatDate(day.date) }}
+            </p>
             <p class="forecast__temp">{{ day.temperature }}{{ configStore.unitSymbol }}</p>
-            <p class="forecast__condition">{{ day.condition }}</p>
+            <p class="forecast__condition">
+              {{ day.condition }}
+            </p>
           </div>
         </div>
         <p v-else class="forecast__empty">예보 정보를 불러오지 못했습니다.</p>

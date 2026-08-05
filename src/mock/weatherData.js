@@ -34,5 +34,5 @@ export const weatherList = [
 ]
 
 export function findCityById(cityId) {
-  return weatherList.find(item => item.id === cityId) ?? null
+  return weatherList.find((item) => item.id === cityId) ?? null
 }

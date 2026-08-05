@@ -20,7 +20,7 @@ function goHome() {
       </p>
     </template>
     <template #extra>
-      <el-button type="primary" @click="goHome">날씨 메인으로 이동</el-button>
+      <el-button type="primary" @click="goHome"> 날씨 메인으로 이동 </el-button>
     </template>
   </el-result>
 </template>

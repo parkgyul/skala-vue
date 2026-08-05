@@ -16,7 +16,7 @@ const selectedCityInfo = ref('')
 const filteredWeatherList = computed(() => {
   const query = searchQuery.value.trim()
   if (!query) return weatherList
-  return weatherList.filter(item => item.city.includes(query))
+  return weatherList.filter((item) => item.city.includes(query))
 })
 
 watch(selectedCityInfo, (newValue) => {
@@ -24,7 +24,9 @@ watch(selectedCityInfo, (newValue) => {
 })
 
 watchEffect(() => {
-  console.log(`[watchEffect 자동 호출] 현재 검색어 '${searchQuery.value}'에 매칭되는 데이터를 필터링합니다.`)
+  console.log(
+    `[watchEffect 자동 호출] 현재 검색어 '${searchQuery.value}'에 매칭되는 데이터를 필터링합니다.`
+  )
 })
 
 function handleUpdateQuery(value) {

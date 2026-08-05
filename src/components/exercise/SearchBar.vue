@@ -22,7 +22,7 @@ function handleInput(value) {
       clearable
       @input="handleInput"
     >
-      <template #prefix>🔍</template>
+      <template #prefix> 🔍 </template>
     </el-input>
     <p class="search__echo">
       검색 중인 도시: <strong>{{ query }}</strong>

@@ -26,9 +26,12 @@ onMounted(() => {
   }
 })
 
-watch(() => configStore.unit, () => {
-  if (cityItem.value) loadForecast()
-})
+watch(
+  () => configStore.unit,
+  () => {
+    if (cityItem.value) loadForecast()
+  }
+)
 
 async function loadForecast() {
   isForecastLoading.value = true
@@ -48,9 +51,9 @@ function formatDate(dateStr) {
 
 const displayTemp = computed(() => {
   if (!cityItem.value) return null
-  const rawTemp = cityItem.value.temperature 
+  const rawTemp = cityItem.value.temperature
   if (configStore.unit === 'fahrenheit') {
-    return Math.round((rawTemp * 9) / 5 + 32) 
+    return Math.round((rawTemp * 9) / 5 + 32)
   }
   return rawTemp
 })
@@ -73,7 +76,7 @@ function goHome() {
         <li>현재 풍속: {{ cityItem.windSpeed }}m/s</li>
       </ul>
 
-      <el-button type="primary" @click="goHome">← 메인 대시보드로 돌아가기</el-button>
+      <el-button type="primary" @click="goHome"> ← 메인 대시보드로 돌아가기 </el-button>
     </section>
 
     <section class="forecast-card">
@@ -81,17 +84,23 @@ function goHome() {
       <el-skeleton v-if="isForecastLoading" :rows="1" animated />
       <div v-else-if="forecast.length > 0" class="forecast-card__list">
         <div v-for="day in forecast" :key="day.date" class="forecast-card__item">
-          <p class="forecast-card__date">{{ formatDate(day.date) }}</p>
+          <p class="forecast-card__date">
+            {{ formatDate(day.date) }}
+          </p>
           <p class="forecast-card__temp">{{ day.temperature }}{{ configStore.unitSymbol }}</p>
-          <p class="forecast-card__condition">{{ day.condition }}</p>
+          <p class="forecast-card__condition">
+            {{ day.condition }}
+          </p>
         </div>
       </div>
-      <p v-else class="forecast-card__empty">예보 정보를 불러오지 못했습니다. (API 키 설정을 확인하세요)</p>
+      <p v-else class="forecast-card__empty">
+        예보 정보를 불러오지 못했습니다. (API 키 설정을 확인하세요)
+      </p>
     </section>
   </div>
 
   <el-empty v-else description="해당 도시 정보를 찾을 수 없습니다.">
-    <el-button type="primary" @click="goHome">메인 대시보드로 이동</el-button>
+    <el-button type="primary" @click="goHome"> 메인 대시보드로 이동 </el-button>
   </el-empty>
 </template>
 

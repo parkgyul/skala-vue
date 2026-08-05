@@ -2,7 +2,8 @@
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
+const myRegion = `Suwon`
+const regionGreeting = `웰컴 투 ${myRegion}`
 function goHome() {
   router.push('/')
 }
@@ -22,7 +23,7 @@ function goHome() {
       <li>Pinia 스토어를 활용한 실시간 단위(°C/°F) 상태 동기화</li>
     </ul>
 
-    <el-button type="primary" style="width: 100%" @click="goHome">대시보드 홈으로 이동</el-button>
+    <el-button type="primary" style="width: 100%" @click="goHome"> 대시보드 홈으로 이동 </el-button>
   </section>
 </template>
 
